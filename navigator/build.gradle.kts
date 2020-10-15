@@ -5,7 +5,7 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha04" }
+val composeVersion: String by extra { "1.0.0-alpha05" }
 android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.2"
