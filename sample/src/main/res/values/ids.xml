@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="SplashPage" type="id"/>
+    <item name="HomePage" type="id"/>
+    <item name="SecondPage" type="id"/>
+</resources>

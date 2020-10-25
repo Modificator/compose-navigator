@@ -1,6 +1,6 @@
 package com.patchself.compose.navigator
 
-class NavigationStack {
+internal class NavigationStack {
     var currentIndex = -1
         private set
     private val stack = arrayListOf<PageController>()

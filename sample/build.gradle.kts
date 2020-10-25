@@ -1,16 +1,16 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     kotlin("android")
 }
 
 val composeVersion: String by extra { "1.0.0-alpha05" }
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+
     defaultConfig {
-//        applicationId = "com.patchself.compose.navigator"
+        applicationId("com.patchself.compose.sample")
         minSdkVersion(29)
         targetSdkVersion(30)
         versionCode = 1
@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
@@ -50,7 +51,8 @@ dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.ui:ui-tooling:$composeVersion")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-beta01")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha06")
+    implementation(project(path = ":navigator"))
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
