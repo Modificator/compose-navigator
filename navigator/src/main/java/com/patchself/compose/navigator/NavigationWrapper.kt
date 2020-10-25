@@ -3,7 +3,6 @@ package com.patchself.compose.navigator
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.ExponentialDecay
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.draw.drawShadow
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.id
 import androidx.compose.ui.layout.layoutId
