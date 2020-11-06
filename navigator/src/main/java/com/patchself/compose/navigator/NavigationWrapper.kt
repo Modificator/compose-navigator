@@ -51,12 +51,16 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
                 right.value = current.current
                 state.current = current.current
             }
+            is NavigationMode.Reset -> {
+                left.value = stack.getCurrent()
+                right.value = state.current
+            }
         }
         onCommit(v1 = current, callback = {
             var autoAnimTargetValue = 0f
             var autoAnimStartValue = 0f
             when (current) {
-                is NavigationMode.Backward ->{
+                is NavigationMode.Backward,is NavigationMode.Reset ->{
                     autoAnimTargetValue = maxValue
                     autoAnimStartValue = minValue
                 }
@@ -73,6 +77,11 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     }
                     is NavigationMode.Backward -> {
                         stack.removeLast()
+                        state.current = left.value
+                        right.value = left.value
+                        left.value = stack.getPrevious()
+                    }
+                    is NavigationMode.Reset -> {
                         state.current = left.value
                         right.value = left.value
                         left.value = stack.getPrevious()

@@ -93,7 +93,17 @@ internal class NavigationStack {
         return null
     }
 
-    fun destroy(index: Int): PageController? {
+    fun resetTo(controller: PageController){
+        for (index in stack.size - 1 downTo 0) {
+            if (stack.getOrNull(index) == controller){
+                return
+            }
+            currentIndex--
+            destory(index)
+        }
+    }
+
+    fun destory(index: Int): PageController? {
         val page = remove(index)
         page?.destory()
         return page
@@ -104,7 +114,7 @@ internal class NavigationStack {
         val it = stack.iterator()
         while (it.hasNext()) {
             if (it.next().getId() == id) {
-                return destroy(index)
+                return destory(index)
             }
             index++
         }
@@ -114,7 +124,7 @@ internal class NavigationStack {
     fun destoryAllById(id: Int) {
         for (index in stack.size - 2 downTo 0) {
             if (stack.getOrNull(index)?.getId() == id) {
-                destroy(index)
+                destory(index)
             }
         }
     }
@@ -124,7 +134,7 @@ internal class NavigationStack {
         val it = stack.iterator()
         while (it.hasNext()) {
             if (it.next().getId() == id && currentIndex != index) {
-                return destroy(index)
+                return destory(index)
             }
             index++
         }

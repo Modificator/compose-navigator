@@ -19,6 +19,9 @@ import com.patchself.compose.navigator.PageController
 import com.patchself.compose.sample.R
 
 class HomePage : PageController() {
+
+    var fromThirdPage = false
+
     override fun getId() = R.id.HomePage
 
     @Composable
@@ -29,7 +32,7 @@ class HomePage : PageController() {
             Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
                 FloatingActionButton(onClick = {
                     navigateTo(SecondPage())
-                }) {
+                },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
                         asset = Icons.Filled.ArrowForward,
                         colorFilter = ColorFilter.tint(Color.White)
@@ -40,6 +43,13 @@ class HomePage : PageController() {
                     text = "Next Page",
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
+                if (fromThirdPage){
+                    Spacer(modifier = Modifier.height(Dp(25f)))
+                    Text(
+                        text = "Reset from Third Page",
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
             }
         }
     }

@@ -22,14 +22,25 @@ class NavigationController {
     fun navigateBack(): Boolean {
         stack.getPrevious()?.let {
             current = NavigationMode.Backward(it)
+            return true
         }
-        return true
+        return false
     }
 
     fun navigateTo(controller: PageController): Boolean {
         stack.push(controller,true)
         current = NavigationMode.Forward(controller)
         return true
+    }
+
+    fun <T : PageController> resetTo(targetId: Int,reinit:(T.()->Unit)?=null): Boolean {
+        stack.findLastById(targetId)?.let {
+            stack.resetTo(it)
+            reinit?.invoke(it as T)
+            current = NavigationMode.Reset(it)
+            return true
+        }
+        return false
     }
 
     fun initController(controller: PageController){

@@ -21,14 +21,14 @@ import androidx.compose.ui.unit.dp
 import com.patchself.compose.navigator.PageController
 import com.patchself.compose.sample.R
 
-class SecondPage : PageController() {
-    override fun getId() = R.id.SecondPage
+class ThirdPage : PageController() {
+    override fun getId() = R.id.ThirdPage
 
     @Composable
     override fun screenContent() {
         Scaffold(topBar = {
             TopAppBar(
-                title = { Text(text = "Second Page") },
+                title = { Text(text = "Third Page") },
                 navigationIcon = {
                     IconButton(onClick = { navigateBack() }) {
                         Icon(asset = Icons.Filled.ArrowBack)
@@ -48,7 +48,37 @@ class SecondPage : PageController() {
                 }
                 Spacer(modifier = Modifier.height(Dp(15f)))
                 Text(
-                    text = "Next Page",
+                    text = "open new ThirdPage",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.height(Dp(35f)))
+                FloatingActionButton(onClick = {
+                    resetTo(R.id.SecondPage)
+                },Modifier.align(Alignment.CenterHorizontally)) {
+                    Image(
+                        asset = Icons.Filled.ArrowBack,
+                        colorFilter = ColorFilter.tint(Color.White)
+                    )
+                }
+                Spacer(modifier = Modifier.height(Dp(15f)))
+                Text(
+                    text = "Reset to SecondPage",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.height(Dp(35f)))
+                FloatingActionButton(onClick = {
+                    resetTo<HomePage>(R.id.HomePage) {
+                        fromThirdPage = true
+                    }
+                },Modifier.align(Alignment.CenterHorizontally)) {
+                    Image(
+                        asset = Icons.Filled.ArrowBack,
+                        colorFilter = ColorFilter.tint(Color.White)
+                    )
+                }
+                Spacer(modifier = Modifier.height(Dp(15f)))
+                Text(
+                    text = "Reset to HomePage",
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             }

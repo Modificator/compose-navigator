@@ -30,6 +30,14 @@ abstract class PageController:CoroutineScope by MainScope() {
         return navigationController.navigateBack()
     }
 
+    fun <T : PageController> resetTo(targetId: Int,reinit:(T.()->Unit)?=null): Boolean {
+        return navigationController.resetTo(targetId, reinit)
+    }
+
+    fun resetTo(targetId: Int): Boolean {
+        return resetTo<PageController>(targetId)
+    }
+
     open fun setController(controller: PageController){
         navigationController.initController(controller)
     }
