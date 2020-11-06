@@ -10,13 +10,13 @@ In your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.patchself:compose-navigator:0.1.0'
+    implementation 'com.patchself:compose-navigator:0.1.1'
 }
 ```
 Or if you use gradle.kts, in your`build.gradle.kts`
 ```kotlin
 dependencies {
-    implementation("com.patchself:compose-navigator:0.1.0")
+    implementation("com.patchself:compose-navigator:0.1.1")
 }
 ```
 
@@ -70,5 +70,10 @@ class CustomPage : PageController() {
 }
 ```
 3. In your Custom Page,which extend `PageController`, you can use `navigateTo(PageController)` to new page, and `navigateBack()` go back to last page
-
+4. You can use `resetTo(pageId)` back to specify page, and change page args like
+   ```kotlin
+   resetTo<HomePage>(R.id.HomePage){
+       argsOfHomePage = newValue
+   }
+   ```
 ![preview](./images/preview.gif "")

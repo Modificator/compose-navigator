@@ -7,7 +7,7 @@ plugins {
     id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha05" }
+val composeVersion: String by extra { "1.0.0-alpha06" }
 android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.2"
@@ -59,7 +59,7 @@ tasks.register("sourcesJar",Jar::class.java){
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-val libVersion = "0.1.0"
+val libVersion = "0.1.1"
 val libGroup = "com.patchself"
 
 afterEvaluate {
