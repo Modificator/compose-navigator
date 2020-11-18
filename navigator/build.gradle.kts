@@ -7,13 +7,13 @@ plugins {
     id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha06" }
+val composeVersion: String by extra { "1.0.0-alpha07" }
 android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.2"
     defaultConfig {
 //        applicationId = "com.patchself.compose.navigator"
-        minSdkVersion(29)
+        minSdkVersion(28)
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
@@ -59,7 +59,7 @@ tasks.register("sourcesJar",Jar::class.java){
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-val libVersion = "0.1.1"
+val libVersion = "0.1.2"
 val libGroup = "com.patchself"
 
 afterEvaluate {
@@ -96,8 +96,8 @@ afterEvaluate {
         }
     }
     bintray {
-        user = ""
-        key = ""
+        user = project.findProperty("bintrayUser") as? String ?: System.getenv("BINTRAY_USER")
+        key = project.findProperty("bintrayApiKey") as? String ?: System.getenv("BINTRAY_API_KEY")
         setPublications("Production")
         override = true
         pkg = PackageConfig().apply {
@@ -111,7 +111,7 @@ afterEvaluate {
             dryRun = false
             version = VersionConfig().apply {
                 name = libVersion
-                desc = "Jetpack compose navigator, page backstack"
+                desc = "Upgrade compose version"
 
                 vcsTag = libVersion
             }

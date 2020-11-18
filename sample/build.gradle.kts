@@ -5,13 +5,13 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha06" }
+val composeVersion: String by extra { "1.0.0-alpha07" }
 android {
     compileSdkVersion(30)
 
     defaultConfig {
         applicationId("com.patchself.compose.sample")
-        minSdkVersion(29)
+        minSdkVersion(28)
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
