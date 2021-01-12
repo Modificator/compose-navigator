@@ -1,14 +1,13 @@
 package com.patchself.compose.sample.ui
 
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.*
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
@@ -31,7 +30,7 @@ class ThirdPage : PageController() {
                 title = { Text(text = "Third Page") },
                 navigationIcon = {
                     IconButton(onClick = { navigateBack() }) {
-                        Icon(asset = Icons.Filled.ArrowBack)
+                        Icon(Icons.Filled.ArrowBack)
                     }
                 },
                 elevation = 4.dp
@@ -42,7 +41,7 @@ class ThirdPage : PageController() {
                     navigateTo(ThirdPage())
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
-                        asset = Icons.Filled.ArrowForward,
+                        Icons.Filled.ArrowForward,
                         colorFilter = ColorFilter.tint(Color.White)
                     )
                 }
@@ -56,7 +55,7 @@ class ThirdPage : PageController() {
                     resetTo(R.id.SecondPage)
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
-                        asset = Icons.Filled.ArrowBack,
+                        Icons.Filled.ArrowBack,
                         colorFilter = ColorFilter.tint(Color.White)
                     )
                 }
@@ -72,7 +71,7 @@ class ThirdPage : PageController() {
                     }
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
-                        asset = Icons.Filled.ArrowBack,
+                        Icons.Filled.ArrowBack,
                         colorFilter = ColorFilter.tint(Color.White)
                     )
                 }

@@ -1,10 +1,10 @@
 package com.patchself.compose.sample.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -33,8 +33,7 @@ class HomePage : PageController() {
                 FloatingActionButton(onClick = {
                     navigateTo(SecondPage())
                 },Modifier.align(Alignment.CenterHorizontally)) {
-                    Image(
-                        asset = Icons.Filled.ArrowForward,
+                    Image(Icons.Filled.ArrowForward,
                         colorFilter = ColorFilter.tint(Color.White)
                     )
                 }

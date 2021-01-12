@@ -5,7 +5,9 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha07" }
+val composeVersion: String by extra { "1.0.0-alpha09" }
+val kotlinVersion: String by extra { "1.4.21" }
+
 android {
     compileSdkVersion(30)
 
@@ -38,7 +40,7 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = composeVersion
-        kotlinCompilerVersion = "1.4.10"
+        kotlinCompilerVersion = kotlinVersion
     }
 }
 
@@ -50,8 +52,8 @@ dependencies {
     implementation("com.google.android.material:material:1.2.1")
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.ui:ui-tooling:$composeVersion")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha06")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-rc01")
     implementation(project(path = ":navigator"))
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

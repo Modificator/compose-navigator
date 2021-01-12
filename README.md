@@ -10,13 +10,13 @@ In your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.patchself:compose-navigator:0.1.2'
+    implementation 'com.patchself:compose-navigator:0.1.3'
 }
 ```
 Or if you use gradle.kts, in your`build.gradle.kts`
 ```kotlin
 dependencies {
-    implementation("com.patchself:compose-navigator:0.1.2")
+    implementation("com.patchself:compose-navigator:0.1.3")
 }
 ```
 

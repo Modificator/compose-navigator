@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         navigationController.initController(SplashPage())
         setContent {
-            navigationController.viewContent()
+            navigationController.ViewContent()
         }
     }
 

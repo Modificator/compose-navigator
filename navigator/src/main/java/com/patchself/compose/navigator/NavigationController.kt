@@ -1,22 +1,25 @@
 package com.patchself.compose.navigator
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 val navigationController = NavigationController()
 
 class NavigationController {
-    //    @Composable
     private val stack = NavigationStack()
-    private var current: NavigationMode by mutableStateOf(NavigationMode.Rebase(EmptyPage()))//:ScreenController by state<ScreenController>{ SplashController() }
+    private var current: NavigationMode by mutableStateOf(NavigationMode.Rebase(EmptyPage()))
     private var currentIndex=0
     @Preview
     @Composable
-    fun viewContent() {
-        navigationWrapper(current = current,stack = stack)
+    fun ViewContent() {
+        Column {
+            navigationWrapper(current = current,stack = stack)
+        }
     }
 
     fun navigateBack(): Boolean {

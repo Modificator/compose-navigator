@@ -7,10 +7,12 @@ plugins {
     id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha07" }
+val composeVersion: String by extra { "1.0.0-alpha09" }
+val kotlinVersion: String by extra { "1.4.21" }
+
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+    buildToolsVersion = "30.0.3"
     defaultConfig {
 //        applicationId = "com.patchself.compose.navigator"
         minSdkVersion(28)
@@ -40,7 +42,7 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = composeVersion
-        kotlinCompilerVersion = "1.4.10"
+        kotlinCompilerVersion = kotlinVersion
     }
 }
 
@@ -48,7 +50,7 @@ dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.ui:ui-tooling:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
@@ -59,7 +61,7 @@ tasks.register("sourcesJar",Jar::class.java){
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-val libVersion = "0.1.2"
+val libVersion = "0.1.3"
 val libGroup = "com.patchself"
 
 afterEvaluate {

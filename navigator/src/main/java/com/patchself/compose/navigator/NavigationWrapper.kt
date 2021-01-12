@@ -11,16 +11,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.onCommit
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawShadow
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.WithConstraints
-import androidx.compose.ui.layout.id
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.util.fastForEach
-import androidx.compose.ui.util.fastMaxBy
 import kotlin.math.max
 import kotlin.math.min
 
@@ -127,14 +124,14 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
                 })
             }
         )) {
-            Layout(children = {
+            Layout(content = {
                 Box(Modifier.layoutId(0)) { left.value?.screenContent() }
-                Box(Modifier.layoutId(1).drawShadow(Dp(8f))) { right.value?.screenContent() }
+                Box(Modifier.layoutId(1).shadow(Dp(8f))) { right.value?.screenContent() }
             }, measureBlock = { list, constraints ->
-                val placeables = list.map { it.measure(constraints) to it.id }
-                val height = placeables.fastMaxBy { it.first.height }?.first?.height ?: 0
+                val placeables = list.map { it.measure(constraints) to it.layoutId }
+                val height = placeables.maxByOrNull { it.first.height }?.first?.height ?: 0
                 layout(constraints.maxWidth, height) {
-                    placeables.fastForEach { (placeable, tag) ->
+                    placeables.forEach { (placeable, tag) ->
                         if (tag is Int) {
                             placeable.place(
                                 x = if (tag == 0) {
