@@ -34,7 +34,8 @@ class HomePage : PageController() {
                     navigateTo(SecondPage())
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(Icons.Filled.ArrowForward,
-                        colorFilter = ColorFilter.tint(Color.White)
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentDescription = ""
                     )
                 }
                 Spacer(modifier = Modifier.height(Dp(15f)))

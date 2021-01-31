@@ -26,19 +26,23 @@ class SecondPage : PageController() {
                 title = { Text(text = "Second Page") },
                 navigationIcon = {
                     IconButton(onClick = { navigateBack() }) {
-                        Icon(Icons.Filled.ArrowBack)
+                        Icon(Icons.Filled.ArrowBack,
+                            contentDescription = null)
                     }
                 },
                 elevation = 4.dp
             )
         }) {
-            Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
+            Column(modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize()) {
                 FloatingActionButton(onClick = {
                     navigateTo(ThirdPage())
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
                         Icons.Filled.ArrowForward,
-                        colorFilter = ColorFilter.tint(Color.White)
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentDescription = ""
                     )
                 }
                 Spacer(modifier = Modifier.height(Dp(15f)))

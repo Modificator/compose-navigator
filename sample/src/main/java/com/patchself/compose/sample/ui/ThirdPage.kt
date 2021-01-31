@@ -30,19 +30,22 @@ class ThirdPage : PageController() {
                 title = { Text(text = "Third Page") },
                 navigationIcon = {
                     IconButton(onClick = { navigateBack() }) {
-                        Icon(Icons.Filled.ArrowBack)
+                        Icon(Icons.Filled.ArrowBack,contentDescription = null)
                     }
                 },
                 elevation = 4.dp
             )
         }) {
-            Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
+            Column(modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize()) {
                 FloatingActionButton(onClick = {
                     navigateTo(ThirdPage())
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
                         Icons.Filled.ArrowForward,
-                        colorFilter = ColorFilter.tint(Color.White)
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentDescription = null
                     )
                 }
                 Spacer(modifier = Modifier.height(Dp(15f)))
@@ -56,7 +59,8 @@ class ThirdPage : PageController() {
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
                         Icons.Filled.ArrowBack,
-                        colorFilter = ColorFilter.tint(Color.White)
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentDescription = null
                     )
                 }
                 Spacer(modifier = Modifier.height(Dp(15f)))
@@ -72,7 +76,8 @@ class ThirdPage : PageController() {
                 },Modifier.align(Alignment.CenterHorizontally)) {
                     Image(
                         Icons.Filled.ArrowBack,
-                        colorFilter = ColorFilter.tint(Color.White)
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentDescription = null
                     )
                 }
                 Spacer(modifier = Modifier.height(Dp(15f)))

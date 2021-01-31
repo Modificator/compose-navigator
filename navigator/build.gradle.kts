@@ -7,8 +7,8 @@ plugins {
     id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha09" }
-val kotlinVersion: String by extra { "1.4.21" }
+val composeVersion: String by extra { "1.0.0-alpha11" }
+val kotlinVersion: String by extra { "1.4.21-2" }
 
 android {
     compileSdkVersion(30)
