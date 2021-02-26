@@ -2,7 +2,7 @@ package com.patchself.compose.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import com.patchself.compose.navigator.navigationController
 import com.patchself.compose.sample.ui.SplashPage
 

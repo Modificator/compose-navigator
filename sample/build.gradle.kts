@@ -5,8 +5,8 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion: String by extra { "1.0.0-alpha11" }
-val kotlinVersion: String by extra { "1.4.21-2" }
+val composeVersion: String by extra { "1.0.0-beta01" }
+val kotlinVersion: String by extra { "1.4.30" }
 
 android {
     compileSdkVersion(30)
@@ -53,8 +53,10 @@ dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
+    implementation("androidx.activity:activity-compose:1.3.0-alpha03")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-rc01")
     implementation(project(path = ":navigator"))
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.30")
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
