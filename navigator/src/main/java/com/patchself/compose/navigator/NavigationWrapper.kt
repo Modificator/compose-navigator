@@ -41,14 +41,14 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
             is NavigationMode.Backward -> {
                 left.value = current.current!!
                 coroutineScope.launch {
-                    swipeOffset.snapTo(maxValue)
+                    swipeOffset.snapTo(minValue)
                 }
                 right.value = state.current
             }
             is NavigationMode.Forward -> {
                 left.value = state.current!!
                 coroutineScope.launch {
-                    swipeOffset.snapTo(minValue)
+                    swipeOffset.snapTo(maxValue)
                 }
                 right.value = current.current!!
             }
@@ -133,7 +133,7 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
                         removePage?.onBlur()
                         right.value = left.value
                         state.current = right.value
-//                        current.current = state.current
+                        current.current = state.current
                         left.value = stack.getPrevious()
                         right.value?.onFocus()
                     }
