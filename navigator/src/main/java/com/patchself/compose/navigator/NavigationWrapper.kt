@@ -6,13 +6,9 @@ import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.rememberSwipeableState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.consumeAllChanges
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
@@ -22,7 +18,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Composable
-internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, modifier: Modifier = Modifier){
+internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, modifier: Modifier = Modifier){
     var isAnimating = remember { false }
     BoxWithConstraints(modifier = modifier
         .fillMaxSize()
@@ -47,7 +43,7 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
             }
             is NavigationMode.Forward -> {
                 left.value = state.current!!
-                coroutineScope.launch {
+                runBlocking {
                     swipeOffset.snapTo(maxValue)
                 }
                 right.value = current.current!!
@@ -76,10 +72,10 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
                 }
             }
             coroutineScope.launch {
-                swipeOffset.snapTo(autoAnimStartValue)
             }
             isAnimating = true
             coroutineScope.launch {
+                swipeOffset.snapTo(autoAnimStartValue)
                 swipeOffset.animateTo(autoAnimTargetValue, tween(400))
                 when (current) {
                     is NavigationMode.Forward -> {
@@ -145,11 +141,11 @@ internal fun navigationWrapper(current: NavigationMode, stack: NavigationStack, 
                 )
         ) {
             Layout(content = {
-                Box(Modifier.layoutId(0)) { left.value?.screenContent() }
+                Box(Modifier.layoutId(0)) { left.value?.ScreenContent() }
                 Box(
                     Modifier
                         .layoutId(1)
-                        .shadow(Dp(8f))) { right.value?.screenContent() }
+                        .shadow(Dp(8f))) { right.value?.ScreenContent() }
             }, measurePolicy = { list, constraints ->
                 val placeables = list.map { it.measure(constraints) to it.layoutId }
                 val height = placeables.maxByOrNull { it.first.height }?.first?.height ?: 0

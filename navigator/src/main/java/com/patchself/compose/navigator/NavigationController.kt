@@ -18,7 +18,7 @@ class NavigationController {
     @Composable
     fun ViewContent() {
         Column {
-            navigationWrapper(current = current,stack = stack)
+            NavigationWrapper(current = current,stack = stack)
         }
     }
 

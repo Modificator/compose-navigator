@@ -24,7 +24,7 @@ class ThirdPage : PageController() {
     override fun getId() = R.id.ThirdPage
 
     @Composable
-    override fun screenContent() {
+    override fun ScreenContent() {
         Scaffold(topBar = {
             TopAppBar(
                 title = { Text(text = "Third Page") },

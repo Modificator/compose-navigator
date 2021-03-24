@@ -25,7 +25,7 @@ class HomePage : PageController() {
     override fun getId() = R.id.HomePage
 
     @Composable
-    override fun screenContent() {
+    override fun ScreenContent() {
         Scaffold(topBar = {
             TopAppBar(title = { Text(text = "Navigator Sample") }, elevation = 4.dp)
         }) {

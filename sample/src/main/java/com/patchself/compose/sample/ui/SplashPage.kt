@@ -21,7 +21,7 @@ class SplashPage: PageController() {
 
     @Preview
     @Composable
-    override fun screenContent() {
+    override fun ScreenContent() {
         Box(modifier = Modifier
             .fillMaxSize()
             .background(Color.White)){

@@ -20,7 +20,7 @@ class SecondPage : PageController() {
     override fun getId() = R.id.SecondPage
 
     @Composable
-    override fun screenContent() {
+    override fun ScreenContent() {
         Scaffold(topBar = {
             TopAppBar(
                 title = { Text(text = "Second Page") },

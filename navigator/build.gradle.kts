@@ -7,8 +7,8 @@ plugins {
     id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.0-beta01" }
-val kotlinVersion: String by extra { "1.4.30" }
+val composeVersion: String by extra { "1.0.0-beta02" }
+val kotlinVersion: String by extra { "1.4.31" }
 
 android {
     compileSdkVersion(30)
@@ -51,7 +51,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.30")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.31")
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")

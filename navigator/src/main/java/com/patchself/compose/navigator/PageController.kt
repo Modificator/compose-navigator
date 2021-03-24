@@ -11,7 +11,7 @@ abstract class PageController:CoroutineScope by MainScope() {
     open abstract fun getId():Int
 
     @Composable
-    open abstract fun screenContent()
+    open abstract fun ScreenContent()
 
     @CallSuper
     open fun onFocus() {
@@ -62,7 +62,7 @@ class EmptyPage: PageController() {
     }
 
     @Composable
-    override fun screenContent() {
+    override fun ScreenContent() {
 
     }
 }
