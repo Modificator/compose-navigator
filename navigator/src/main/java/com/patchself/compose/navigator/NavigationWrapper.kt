@@ -70,8 +70,8 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     autoAnimStartValue = maxValue
                 }
             }
-            isAnimating = true
             coroutineScope.launch {
+                isAnimating = true
                 if (current !is NavigationMode.Backward) {
                     swipeOffset.snapTo(autoAnimStartValue)
                 }
