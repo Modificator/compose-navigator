@@ -4,10 +4,10 @@ plugins {
     id("com.android.library")
     kotlin("android")
     `maven-publish`
-    id("com.jfrog.bintray")
+    //id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.0-beta02" }
+val composeVersion: String by extra { "1.0.0-beta03" }
 val kotlinVersion: String by extra { "1.4.31" }
 
 android {
@@ -62,7 +62,7 @@ tasks.register("sourcesJar",Jar::class.java){
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-val libVersion = "0.1.3"
+val libVersion = "0.1.4"
 val libGroup = "com.patchself"
 
 afterEvaluate {
@@ -98,26 +98,26 @@ afterEvaluate {
             }
         }
     }
-    bintray {
-        user = project.findProperty("bintrayUser") as? String ?: System.getenv("BINTRAY_USER")
-        key = project.findProperty("bintrayApiKey") as? String ?: System.getenv("BINTRAY_API_KEY")
-        setPublications("Production")
-        override = true
-        pkg = PackageConfig().apply {
-            repo = "Compose"
-            name = "compose-navigator"
-            description = "Jetpack compose navigator, page backstack"
-            publish = true
-            publicDownloadNumbers = true
-            setLicenses("Apache-2.0")
-            vcsUrl = "https://github.com/Modificator/compose-navigator.git"
-            dryRun = false
-            version = VersionConfig().apply {
-                name = libVersion
-                desc = "Upgrade compose version"
-
-                vcsTag = libVersion
-            }
-        }
-    }
+//    bintray {
+//        user = project.findProperty("bintrayUser") as? String ?: System.getenv("BINTRAY_USER")
+//        key = project.findProperty("bintrayApiKey") as? String ?: System.getenv("BINTRAY_API_KEY")
+//        setPublications("Production")
+//        override = true
+//        pkg = PackageConfig().apply {
+//            repo = "Compose"
+//            name = "compose-navigator"
+//            description = "Jetpack compose navigator, page backstack"
+//            publish = true
+//            publicDownloadNumbers = true
+//            setLicenses("Apache-2.0")
+//            vcsUrl = "https://github.com/Modificator/compose-navigator.git"
+//            dryRun = false
+//            version = VersionConfig().apply {
+//                name = libVersion
+//                desc = "Upgrade compose version"
+//
+//                vcsTag = libVersion
+//            }
+//        }
+//    }
 }

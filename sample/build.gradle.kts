@@ -5,7 +5,7 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion: String by extra { "1.0.0-beta02" }
+val composeVersion: String by extra { "1.0.0-beta03" }
 val kotlinVersion: String by extra { "1.4.31" }
 
 android {

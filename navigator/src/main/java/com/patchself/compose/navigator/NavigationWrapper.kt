@@ -22,7 +22,8 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
     var isAnimating = remember { false }
     BoxWithConstraints(modifier = modifier
         .fillMaxSize()
-        .pointerInteropFilter { isAnimating }) {    val coroutineScope = rememberCoroutineScope()
+        .pointerInteropFilter { isAnimating }) {
+        val coroutineScope = rememberCoroutineScope()
 
         val state = remember { NavigationState() }
         val swipeOffset = remember { Animatable(0f) }
@@ -30,19 +31,14 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
         val maxValue = constraints.maxWidth.toFloat()
         val left = mutableStateOf<PageController?>(null)
         val right = mutableStateOf<PageController?>(null)
-//        if (state.current == current.current){
-//            return@BoxWithConstraints
-//        }
+
         when (current) {
             is NavigationMode.Backward -> {
-                left.value = current.current!!
-                coroutineScope.launch {
-                    swipeOffset.snapTo(minValue)
-                }
-                right.value = state.current
+                left.value = stack.getPrevious()
+                right.value = stack.getCurrent()
             }
             is NavigationMode.Forward -> {
-                left.value = state.current!!
+                left.value = state.current
                 runBlocking {
                     swipeOffset.snapTo(maxValue)
                 }
@@ -62,7 +58,10 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
             var autoAnimTargetValue = 0f
             var autoAnimStartValue = 0f
             when (current) {
-                is NavigationMode.Backward,is NavigationMode.Reset ->{
+                is NavigationMode.Backward->{
+                    autoAnimTargetValue = maxValue
+                    autoAnimStartValue = swipeOffset.value
+                }is NavigationMode.Reset ->{
                     autoAnimTargetValue = maxValue
                     autoAnimStartValue = minValue
                 }
@@ -71,20 +70,21 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     autoAnimStartValue = maxValue
                 }
             }
-            coroutineScope.launch {
-            }
             isAnimating = true
             coroutineScope.launch {
-                swipeOffset.snapTo(autoAnimStartValue)
+                if (current !is NavigationMode.Backward) {
+                    swipeOffset.snapTo(autoAnimStartValue)
+                }
                 swipeOffset.animateTo(autoAnimTargetValue, tween(400))
                 when (current) {
                     is NavigationMode.Forward -> {
                     }
                     is NavigationMode.Backward -> {
                         stack.removeLast()
-                        state.current = left.value
-                        right.value = left.value
+//                        right.value = left.value
+                        right.value = stack.getCurrent()
                         left.value = stack.getPrevious()
+                        state.current = right.value
                     }
                     is NavigationMode.Reset -> {
                         state.current = left.value
@@ -93,9 +93,7 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     }
                 }
                 state.current = current.current!!
-                coroutineScope.launch {
-                    swipeOffset.snapTo(0f)
-                }
+                swipeOffset.snapTo(0f)
                 isAnimating = false
                 right.value?.onFocus()
                 left.value?.onBlur()
@@ -109,12 +107,15 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     if (stack.size() <= 1 || isAnimating){
                         return@DraggableState
                     }
-                    coroutineScope.launch {
+                    runBlocking {
                         swipeOffset.snapTo(min(max((swipeOffset.value + it), minValue), maxValue))
                     }
                 },
                 orientation = Orientation.Horizontal,
                 onDragStopped = { velocity ->
+                    if (stack.size() <= 1 || isAnimating){
+                        return@draggable
+                    }
                     val targetValue = if (FloatExponentialDecaySpec().getTargetValue(
                             swipeOffset.value,
                             velocity
@@ -122,23 +123,12 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     ) maxValue else minValue
                     isAnimating = true
                     swipeOffset.animateTo(targetValue)
-                    if (targetValue == 0f) {
-//                        state.current = right
-                    } else {
-                        val removePage = stack.removeLast()
-                        removePage?.onBlur()
-                        right.value = left.value
-                        state.current = right.value
-                        current.current = state.current
-                        left.value = stack.getPrevious()
-                        right.value?.onFocus()
-                    }
-                    coroutineScope.launch {
-                        swipeOffset.snapTo(0f)
-                    }
                     isAnimating = false
+                    if (targetValue != 0f) {
+                        navigationController.navigateBack()
+                    }
                 }
-                )
+            )
         ) {
             Layout(content = {
                 Box(Modifier.layoutId(0)) { left.value?.ScreenContent() }
