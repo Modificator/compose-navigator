@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 plugins {
     id("com.android.library")
     kotlin("android")
-    `maven-publish`
+//    `maven-publish`
     //id("com.jfrog.bintray")
 }
 
 val composeVersion: String by extra { "1.0.0-beta04" }
-val kotlinVersion: String by extra { "1.4.31" }
+val kotlinVersion: String by extra { "1.4.32" }
 
 android {
     compileSdkVersion(30)
@@ -51,7 +51,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.31")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
@@ -62,8 +62,9 @@ tasks.register("sourcesJar",Jar::class.java){
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-val libVersion = "0.1.4"
+val libVersion = "0.1.5"
 val libGroup = "com.patchself"
+/*
 
 afterEvaluate {
     publishing {
@@ -120,4 +121,4 @@ afterEvaluate {
 //            }
 //        }
 //    }
-}
+}*/
