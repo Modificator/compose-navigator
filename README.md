@@ -1,6 +1,6 @@
 # Compose Navigator
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Download](https://api.bintray.com/packages/modificator/Compose/compose-navigator/images/download.svg) ](https://bintray.com/modificator/Compose/compose-navigator/_latestVersion)
+[![](https://jitpack.io/v/com.patchself/compose-navigator.svg)](https://jitpack.io/#com.patchself/compose-navigator)
 
 Easier to complete Jetpack Compose navigation
 
