@@ -5,20 +5,20 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion: String by extra { "1.0.0-beta04" }
+val composeVersion: String by extra { "1.0.1" }
 val kotlinVersion: String by extra { "1.4.31" }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(31)
 
     defaultConfig {
         applicationId("com.patchself.compose.sample")
         minSdkVersion(28)
-        targetSdkVersion(30)
+        targetSdkVersion(31)
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+//        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
 
     buildTypes {

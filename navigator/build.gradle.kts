@@ -7,20 +7,18 @@ plugins {
     //id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.0-beta04" }
+val composeVersion: String by extra { "1.0.1" }
 val kotlinVersion: String by extra { "1.4.32" }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(31)
     buildToolsVersion = "30.0.3"
     defaultConfig {
 //        applicationId = "com.patchself.compose.navigator"
         minSdkVersion(28)
-        targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
+        targetSdkVersion(31)
 
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+//        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
 
     buildTypes {
