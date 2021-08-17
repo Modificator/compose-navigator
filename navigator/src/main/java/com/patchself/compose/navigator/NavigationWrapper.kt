@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.input.pointer.pointerInteropFilter
@@ -17,6 +18,7 @@ import kotlinx.coroutines.*
 import kotlin.math.max
 import kotlin.math.min
 
+@ExperimentalComposeUiApi
 @Composable
 internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, modifier: Modifier = Modifier){
     var isAnimating = remember { false }

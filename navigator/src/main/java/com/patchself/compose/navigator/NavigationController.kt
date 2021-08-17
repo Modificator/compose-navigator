@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.Preview
 
 val navigationController = NavigationController()
@@ -14,6 +15,7 @@ class NavigationController {
     private val stack = NavigationStack()
     private var current: NavigationMode by mutableStateOf(NavigationMode.Rebase(EmptyPage()))
     private var currentIndex=0
+    @ExperimentalComposeUiApi
     @Preview
     @Composable
     fun ViewContent() {

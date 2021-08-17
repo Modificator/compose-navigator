@@ -8,15 +8,15 @@ plugins {
 }
 
 val composeVersion: String by extra { "1.0.1" }
-val kotlinVersion: String by extra { "1.4.32" }
+val kotlinVersion: String by extra { "1.5.21" }
 
 android {
-    compileSdkVersion(31)
-    buildToolsVersion = "30.0.3"
+    compileSdk = 31
+    buildToolsVersion = "31.0.0"
     defaultConfig {
 //        applicationId = "com.patchself.compose.navigator"
-        minSdkVersion(28)
-        targetSdkVersion(31)
+        minSdk = 28
+        targetSdk = 31
 
 //        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
@@ -33,14 +33,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = composeVersion
-        kotlinCompilerVersion = kotlinVersion
     }
 }
 
@@ -49,7 +47,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
@@ -60,7 +58,7 @@ tasks.register("sourcesJar",Jar::class.java){
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-val libVersion = "0.1.5"
+val libVersion = "0.1.6"
 val libGroup = "com.patchself"
 /*
 
