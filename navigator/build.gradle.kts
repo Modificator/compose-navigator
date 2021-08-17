@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 plugins {
     id("com.android.library")
     kotlin("android")
-//    `maven-publish`
+    `maven-publish`
     //id("com.jfrog.bintray")
 }
 
@@ -60,7 +60,6 @@ tasks.register("sourcesJar",Jar::class.java){
 
 val libVersion = "0.1.6"
 val libGroup = "com.patchself"
-/*
 
 afterEvaluate {
     publishing {
@@ -117,4 +116,4 @@ afterEvaluate {
 //            }
 //        }
 //    }
-}*/
+}
