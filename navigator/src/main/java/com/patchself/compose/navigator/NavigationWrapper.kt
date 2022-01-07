@@ -22,6 +22,8 @@ import kotlin.math.min
 @Composable
 internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, modifier: Modifier = Modifier){
     var isAnimating = remember { false }
+    //Fix slid bug
+    var isRested = remember { false }
     BoxWithConstraints(modifier = modifier
         .fillMaxSize()
         .pointerInteropFilter { isAnimating }) {
@@ -52,8 +54,15 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                 state.current = current.current
             }
             is NavigationMode.Reset -> {
-                left.value = stack.getCurrent()
+                if(!isRested) {//Fix slid bug
+                    left.value = stack.getCurrent()
+                } else {
+                    left.value = stack.getPrevious()
+                }
                 right.value = state.current
+                if(right.value == state.current) {
+                    isRested = true
+                }
             }
         }
         DisposableEffect(current, effect = {
@@ -64,9 +73,9 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     autoAnimTargetValue = maxValue
                     autoAnimStartValue = swipeOffset.value
                 }is NavigationMode.Reset ->{
-                    autoAnimTargetValue = maxValue
-                    autoAnimStartValue = minValue
-                }
+                autoAnimTargetValue = maxValue
+                autoAnimStartValue = minValue
+            }
                 is NavigationMode.Forward ->{
                     autoAnimTargetValue = minValue
                     autoAnimStartValue = maxValue
