@@ -73,9 +73,9 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     autoAnimTargetValue = maxValue
                     autoAnimStartValue = swipeOffset.value
                 }is NavigationMode.Reset ->{
-                autoAnimTargetValue = maxValue
-                autoAnimStartValue = minValue
-            }
+                    autoAnimTargetValue = maxValue
+                    autoAnimStartValue = minValue
+                }
                 is NavigationMode.Forward ->{
                     autoAnimTargetValue = minValue
                     autoAnimStartValue = maxValue
