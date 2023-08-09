@@ -5,16 +5,16 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion: String by extra { "1.0.1" }
-val kotlinVersion: String by extra { "1.5.21" }
+val composeVersion: String by extra { "1.4.3" }
+val kotlinVersion: String by extra { "1.9.0" }
 
 android {
-    compileSdk = 31
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.patchself.compose.sample"
         minSdk = 28
-        targetSdk = 31
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -38,21 +38,22 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = composeVersion
+        kotlinCompilerExtensionVersion = "1.5.0"
     }
+    namespace = "com.patchself.compose.sample"
 }
 
 dependencies {
 
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation("androidx.activity:activity-compose:1.3.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation(project(path = ":navigator"))
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     testImplementation("junit:junit:4.+")

@@ -43,6 +43,19 @@ class HomePage : PageController() {
                     text = "Next Page",
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
+                FloatingActionButton(onClick = {
+                    navigateTo(TestScrollPage())
+                },Modifier.align(Alignment.CenterHorizontally)) {
+                    Image(Icons.Filled.ArrowForward,
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentDescription = ""
+                    )
+                }
+                Spacer(modifier = Modifier.height(Dp(15f)))
+                Text(
+                    text = "Scroll Page",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
                 if (fromThirdPage){
                     Spacer(modifier = Modifier.height(Dp(25f)))
                     Text(

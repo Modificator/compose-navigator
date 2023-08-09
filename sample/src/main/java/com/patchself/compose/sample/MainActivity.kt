@@ -7,8 +7,9 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import com.patchself.compose.navigator.navigationController
 import com.patchself.compose.sample.ui.SplashPage
 
+@ExperimentalComposeUiApi
 class MainActivity : AppCompatActivity() {
-    @ExperimentalComposeUiApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navigationController.initController(SplashPage())

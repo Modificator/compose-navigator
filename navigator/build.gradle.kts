@@ -7,16 +7,16 @@ plugins {
     //id("com.jfrog.bintray")
 }
 
-val composeVersion: String by extra { "1.0.1" }
-val kotlinVersion: String by extra { "1.5.21" }
+val composeVersion: String by extra { "1.4.3" }
+val kotlinVersion: String by extra { "1.9.0" }
 
 android {
-    compileSdk = 31
+    compileSdk = 33
     buildToolsVersion = "31.0.0"
     defaultConfig {
 //        applicationId = "com.patchself.compose.navigator"
         minSdk = 28
-        targetSdk = 31
+        targetSdk = 33
 
 //        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
@@ -38,16 +38,17 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = composeVersion
+        kotlinCompilerExtensionVersion = "1.5.0"
     }
+    namespace = "com.patchself.compose.navigator"
 }
 
 dependencies {
-    implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    compileOnly(kotlin("stdlib", KotlinCompilerVersion.VERSION))
+    compileOnly("androidx.compose.ui:ui:$composeVersion")
+    compileOnly("androidx.compose.material:material:$composeVersion")
+    compileOnly("androidx.compose.ui:ui-tooling:$composeVersion")
+    compileOnly("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")

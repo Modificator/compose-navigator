@@ -1,12 +1,17 @@
 package com.patchself.compose.navigator
 
+import android.graphics.Point
+import android.graphics.PointF
 import android.util.Log
+import android.view.MotionEvent
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -71,6 +76,7 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                     autoAnimTargetValue = minValue
                     autoAnimStartValue = maxValue
                 }
+                else ->{}
             }
             coroutineScope.launch {
                 isAnimating = true
@@ -93,6 +99,7 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
                         right.value = left.value
                         left.value = stack.getPrevious()
                     }
+                    else ->{}
                 }
                 state.current = current.current!!
                 swipeOffset.snapTo(0f)
@@ -102,60 +109,69 @@ internal fun NavigationWrapper(current: NavigationMode, stack: NavigationStack, 
             }
             onDispose {  }
         })
-
-        Box(Modifier
-            .draggable(
-                state = DraggableState {
-                    if (stack.size() <= 1 || isAnimating){
-                        return@DraggableState
-                    }
-                    runBlocking {
-                        swipeOffset.snapTo(min(max((swipeOffset.value + it), minValue), maxValue))
-                    }
-                },
-                orientation = Orientation.Horizontal,
-                onDragStopped = { velocity ->
-                    if (stack.size() <= 1 || isAnimating){
-                        return@draggable
-                    }
-                    val targetValue = if (FloatExponentialDecaySpec().getTargetValue(
-                            swipeOffset.value,
-                            velocity
-                        ) > maxValue / 2f
-                    ) maxValue else minValue
-                    isAnimating = true
-                    swipeOffset.animateTo(targetValue)
-                    isAnimating = false
-                    if (targetValue != 0f) {
-                        navigationController.navigateBack()
-                    }
-                }
-            )
-        ) {
-            Layout(content = {
-                Box(Modifier.layoutId(0)) { left.value?.ScreenContent() }
-                Box(
-                    Modifier
-                        .layoutId(1)
-                        .shadow(Dp(8f))) { right.value?.ScreenContent() }
-            }, measurePolicy = { list, constraints ->
-                val placeables = list.map { it.measure(constraints) to it.layoutId }
-                val height = placeables.maxByOrNull { it.first.height }?.first?.height ?: 0
-                layout(constraints.maxWidth, height) {
-                    placeables.forEach { (placeable, tag) ->
-                        if (tag is Int) {
-                            placeable.place(
-                                x = if (tag == 0) {
-                                    ((-constraints.maxWidth + swipeOffset.value * 1f) * 0.3f).toInt()
-                                } else {
-                                    swipeOffset.value.toInt()
-                                },
-                                y = 0
+        val drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed)
+        Box {
+            Box(
+                Modifier
+                    .draggable(state = DraggableState {
+                        if (stack.size() <= 1 || isAnimating) {
+                            return@DraggableState
+                        }
+                        runBlocking {
+                            swipeOffset.snapTo(
+                                min(
+                                    max((swipeOffset.value + it), minValue), maxValue
+                                )
                             )
                         }
+                    }, orientation = Orientation.Horizontal, onDragStopped = { velocity ->
+                        if (stack.size() <= 1 || isAnimating) {
+                            return@draggable
+                        }
+                        val targetValue = if (FloatExponentialDecaySpec().getTargetValue(
+                                swipeOffset.value, velocity
+                            ) > maxValue / 2f
+                        ) maxValue else minValue
+                        isAnimating = true
+                        swipeOffset.animateTo(targetValue)
+                        isAnimating = false
+                        if (targetValue != 0f) {
+                            navigationController.navigateBack()
+                        }
+                    })
+            ) {
+                Layout(content = {
+                    Box(Modifier.layoutId(0)) { left.value?.ScreenContent() }
+                    Box(
+                        Modifier
+                            .layoutId(1)
+                            .shadow(Dp(8f))) { right.value?.ScreenContent() }
+                }, measurePolicy = { list, constraints ->
+                    val placeables = list.map { it.measure(constraints) to it.layoutId }
+                    val height = placeables.maxByOrNull { it.first.height }?.first?.height ?: 0
+                    layout(constraints.maxWidth, height) {
+                        placeables.forEach { (placeable, tag) ->
+                            if (tag is Int) {
+                                placeable.place(
+                                    x = if (tag == 0) {
+                                        ((-constraints.maxWidth + swipeOffset.value * 1f) * 0.3f).toInt()
+                                    } else {
+                                        swipeOffset.value.toInt()
+                                    },
+                                    y = 0
+                                )
+                            }
+                        }
                     }
+                })
+            }
+            if (isAnimating){
+                Box(Modifier.pointerInteropFilter {
+                    return@pointerInteropFilter true
+                }) {
+
                 }
-            })
+            }
         }
     }
 }
