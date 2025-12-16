@@ -4,4 +4,5 @@
     <item name="HomePage" type="id"/>
     <item name="SecondPage" type="id"/>
     <item name="ThirdPage" type="id"/>
+    <item name="HyperspacePage" type="id"/>
 </resources>

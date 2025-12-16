@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.patchself.compose.navigator.PageController
 import com.patchself.compose.sample.R
+import com.patchself.compose.sample.hyperspace.HyperspacePage
 
 class HomePage : PageController() {
 
@@ -54,6 +55,19 @@ class HomePage : PageController() {
                 Spacer(modifier = Modifier.height(Dp(15f)))
                 Text(
                     text = "Scroll Page",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                FloatingActionButton(onClick = {
+                    navigateTo(HyperspacePage())
+                }, Modifier.align(Alignment.CenterHorizontally)) {
+                    Image(Icons.Filled.ArrowForward,
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentDescription = ""
+                    )
+                }
+                Spacer(modifier = Modifier.height(Dp(15f)))
+                Text(
+                    text = "Hyperspace Animation",
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
                 if (fromThirdPage){
