@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.platform.LocalDensity
 import kotlinx.coroutines.isActive
 import kotlin.random.Random
 
@@ -29,8 +28,6 @@ fun HyperspaceAnimation(
     baseSpeed: Float = 1f,
     backgroundColor: Color = Color.Black
 ) {
-    val density = LocalDensity.current
-    
     // Animation progress for smooth transitions
     val targetSpeed = when (state) {
         HyperspaceState.Cruise -> 1f
@@ -78,14 +75,10 @@ fun HyperspaceAnimation(
         }
     }
     
-    // Animation frame counter
-    var frame by remember { mutableStateOf(0L) }
-    
+    // Continuous redraw for animation
     LaunchedEffect(Unit) {
         while (isActive) {
-            withFrameNanos {
-                frame = it
-            }
+            withFrameNanos { }
         }
     }
     
@@ -109,11 +102,11 @@ fun HyperspaceAnimation(
             val dy = star.y - centerY
             val distance = kotlin.math.sqrt(dx * dx + dy * dy)
             
+            // Normalize direction (avoid division by zero)
+            val nx = if (distance > 0) dx / distance else 0f
+            val ny = if (distance > 0) dy / distance else 0f
+            
             if (distance > 0) {
-                // Normalize direction
-                val nx = dx / distance
-                val ny = dy / distance
-                
                 // Move star outward
                 val moveSpeed = animatedSpeed * star.speed * 0.5f
                 star.x += nx * moveSpeed

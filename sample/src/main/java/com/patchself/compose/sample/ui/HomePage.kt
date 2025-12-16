@@ -59,7 +59,7 @@ class HomePage : PageController() {
                 )
                 FloatingActionButton(onClick = {
                     navigateTo(HyperspacePage())
-                },Modifier.align(Alignment.CenterHorizontally)) {
+                }, Modifier.align(Alignment.CenterHorizontally)) {
                     Image(Icons.Filled.ArrowForward,
                         colorFilter = ColorFilter.tint(Color.White),
                         contentDescription = ""
